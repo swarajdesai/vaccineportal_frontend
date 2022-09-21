@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Grid,Paper, Avatar, TextField, Button, Typography } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import {NavLink, useHistory} from 'react-router-dom'
+import AuthenticationService from '../../AuthenticationService';
 
 const Login=(props)=>{
 
@@ -10,7 +11,6 @@ const Login=(props)=>{
     const btnstyle={margin:'8px 0'}
     const inpStyle ={margin:'5px 0'}
     const history = useHistory();
-  
 
     const [formData , setFormData]=useState({"email":"","password":""});
     const handleChange = (event) =>{
@@ -31,10 +31,13 @@ const Login=(props)=>{
     const json = await response.json();
     if (response.ok) {
         props.setAlert("visible",json.message,"success");
-        console.log(json);
+        AuthenticationService.storeUserDetails(json.roles , json.jwt);
+        props.setIsUserLoggedIn(true);
+        history.push('/home');
     } else {
         console.log("err",JSON.stringify(json));
-      props.setAlert("visible",json.message,"error");
+        props.setIsUserLoggedIn(false);
+        props.setAlert("visible",json.message,"danger");
     }
     }
     return(

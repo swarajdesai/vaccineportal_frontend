@@ -14,7 +14,8 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {NavLink} from 'react-router-dom';
-
+import Alert from '@mui/material/Alert';
+import PopAlert from './popAlert';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact','Login/SignUp'];
@@ -49,7 +50,7 @@ function NavBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    
+    <>
     <Box sx={{ display: 'flex' }}>
       <AppBar component="nav">
         <Toolbar>
@@ -99,7 +100,11 @@ function NavBar(props) {
       </Box>
       
     </Box>
-     
+     {/* <Alert severity={props.alertData.severity} style={{marginTop:"60px",justifyContent:"center",visibility:props.alertData.alertDisplay}}>
+     {props.alertData.text}
+   </Alert> */}
+   <PopAlert />
+   </>
   );
 }
 

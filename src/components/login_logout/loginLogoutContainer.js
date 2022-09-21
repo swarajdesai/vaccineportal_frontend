@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Login from './login_child'
 import Signup from './sigup_child'
-const SignInOutContainer=({setAlert})=>{
+const SignInOutContainer=({setAlert ,isLoggedIn,setIsUserLoggedIn})=>{
 const [value,setValue]=useState(0)
 const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -47,10 +47,10 @@ const handleChange = (event, newValue) => {
           <Tab label="Sign Up" />
         </Tabs>
         <TabPanel value={value} index={0}>
-       <Login setAlert={setAlert} />
+       <Login setAlert={setAlert} isLoggedIn={isLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <Signup setAlert={setAlert}/>
+      <Signup setAlert={setAlert} isLoggedIn={isLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn} />
       </TabPanel>
       </Paper>
       

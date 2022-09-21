@@ -7,15 +7,15 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 const Signup = (props) => {
   const paperStyle = { padding: 20, width: 300, margin: "0 auto" };
-  const headerStyle = { margin: 0 };
-  const marginTop = { marginTop: 5 };
-  const inpStyle = { marginBottom: "5px" };
+  const headerStyle = { margin: "0 0 10px 0" };
+  const marginTop = { };
+  const inpStyle = { marginBottom: "10px"  };
   // const [isInvalidForm,setIsInvalidForm]=useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    age: "",
+    birthDate: "2000-01-01",
     phoneNo: "",
     gender: "F",
     confPass: "",
@@ -25,7 +25,7 @@ const Signup = (props) => {
     name: /^[a-zA-Z]+$/,
     email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     password: /^[a-zA-Z0-9!@#$]{8,}$/,
-    age: /^[1-9][0-9]$/,
+    birthDate: /^[0-9]*-[0-9]*-[0-9]*$/,
     gender: /^F|M$/,
     phoneNo: /^[1-9]([0-9]{9})$/,
     confPass: new RegExp(formData.password),
@@ -34,7 +34,7 @@ const Signup = (props) => {
     name: "Please Enter valid Name",
     email: "Enter valid Email",
     password: "Enter password with minimum 8 length a-z A-Z 0-9 !@#$",
-    age: "Enter age between 1-99",
+    birthDate: "BirthDate is mandatory",
     phoneNo: "Please Enter valid 10 digit Phone number",
     confPass: "Both Passwords should match",
     gender: "Please Select Gender",
@@ -43,7 +43,7 @@ const Signup = (props) => {
     name: [false, ""],
     email: [false, ""],
     password: [false, ""],
-    age: [false, ""],
+    birthDate: [false, ""],
     gender: [true, "validd"],
     phoneNo: [false, ""],
     confPass: [false, ""],
@@ -56,6 +56,7 @@ const Signup = (props) => {
       [event.target.name]: [false, ""],
     });
     setFormData({ ...formData, [event.target.name]: event.target.value });
+    console.log(  validationStatus,formData)
     if (!validators[event.target.name].test(event.target.value)) {
       setValidationStatus({
         ...validationStatus,
@@ -69,7 +70,7 @@ const Signup = (props) => {
       event.target.value = event.target.value.substr(1);
 
     // updateFormValidity();
-    // console.log(  validationStatus,formData)
+    console.log(  validationStatus,formData)
   };
 
   const handleSubmit = (e) => {
@@ -104,7 +105,7 @@ const Signup = (props) => {
         password: formData.password,
         name: formData.name,
         gender: formData.gender,
-        age: parseInt(formData.age),
+        birthDate: formData.birthDate,
         phoneNumber: formData.phoneNo,
         roles:["ROLE_USER"]
       }),
@@ -114,7 +115,7 @@ const Signup = (props) => {
         props.setAlert("visible",json.message,"success");
     } else {
         console.log("err",JSON.stringify(json));
-      props.setAlert("visible",json.message,"error");
+      props.setAlert("visible",json.message,"danger");
     }
   };
 
@@ -122,7 +123,7 @@ const Signup = (props) => {
     <Grid>
       <Paper style={paperStyle}>
         <Grid align="center">
-          <h2 style={headerStyle}>Sign Up</h2>
+          <h5 style={headerStyle}>Sign Up</h5>
         </Grid>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -134,9 +135,10 @@ const Signup = (props) => {
             label="Name"
             placeholder="Enter your name"
             name="name"
+            size="small"
           />
           <TextField
-            style={inpStyle}
+            // style={inpStyle}
             onChange={handleChange}
             helperText={validationStatus.email[1]}
             error={validationStatus.email[0]}
@@ -144,29 +146,40 @@ const Signup = (props) => {
             fullWidth
             label="Email"
             placeholder="Enter your email"
+            size="small"
           />
-          <FormControl component="fieldset" style={marginTop}>
-            <FormLabel component="legend">Gender</FormLabel>
+          <FormControl row={true} style={{display:"flex",flexDirection:'row',justifyContent:'space-between'}} size="small" >
+            <FormLabel style={{width:'auto',alignSelf:"center",marginBottom:0}} component="legend">Gender</FormLabel>
             <RadioGroup
+              
               aria-label="gender"
               defaultValue="F"
               onChange={handleChange}
               name="gender"
-              style={{ display: "initial" }}
+              // style={{ display: "initial" }}
+              row={true}
             >
-              <FormControlLabel value="F" control={<Radio />} label="Female" />
-              <FormControlLabel value="M" control={<Radio />} label="Male" />
+              <FormControlLabel style={{ width: 'auto' }} value="F" control={<Radio />} label="Female" />
+              <FormControlLabel style={{ width: 'auto' }} value="M" control={<Radio />} label="Male" />
             </RadioGroup>
           </FormControl>
           <TextField
             style={inpStyle}
-            helperText={validationStatus.age[1]}
-            error={validationStatus.age[0]}
+            helperText={validationStatus.birthDate[1]}
+            error={validationStatus.birthDate[0]}
+            id="date"
+            label="Birthday"
+            type="date"
+            defaultValue="2000-01-01"
+            sx={{ width: 220 }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
-            name="age"
+            name="birthDate"
             fullWidth
-            label="Age"
-            placeholder="Enter your age"
+            placeholder="Enter your BirthDate"
+            size="small"
           />
 
           <TextField
@@ -178,6 +191,7 @@ const Signup = (props) => {
             fullWidth
             label="Phone Number"
             placeholder="Enter your phone number"
+            size="small"
           />
           <TextField
             helperText={validationStatus.password[1]}
@@ -188,6 +202,7 @@ const Signup = (props) => {
             fullWidth
             label="Password"
             placeholder="Enter your password"
+            size="small"
           />
 
           <TextField
@@ -199,6 +214,7 @@ const Signup = (props) => {
             fullWidth
             label="Confirm Password"
             placeholder="Confirm your password"
+            size="small"
           />
           <Button type="submit" variant="contained" color="primary">
             Sign up
