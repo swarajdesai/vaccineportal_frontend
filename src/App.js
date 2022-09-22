@@ -4,7 +4,7 @@ import SignInOutContainer from './components/login_logout/loginLogoutContainer';
 import {Route , BrowserRouter , Switch} from 'react-router-dom'
 import { Login } from '@mui/icons-material';
 
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import Home from './components/home';
 import PopAlert from './components/popAlert';
 import BsNavBar from './components/bsNavBar';
@@ -40,6 +40,7 @@ function App() {
       <Route exact path="/">
         <SignInOutContainer setAlert={setAlert} isLoggedIn={isLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn}/>
       </Route>
+      
       <Route exact path="/login">
         <Login />
       </Route>

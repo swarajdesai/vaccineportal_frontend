@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import AuthenticationService from '../AuthenticationService';
 import Certificate from './Certificate';
-import { PDFDownloadLink } from "react-pdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 function MyBookings(props) {
     const history = useHistory();
@@ -69,7 +69,7 @@ function MyBookings(props) {
                 <td>Status : <span class={`fw-bolder text-${b.status === "BOOKED" ? "warning":b.status === "CANCELLED" ?"danger":"success"}`}>{b.status}</span></td>
                 <td>{b.status==="BOOKED" && <button class="btn btn-danger" onClick={() => cancelBooking(b.id,b.hospital , b.vaccine)}>Cancel</button>}
                     {b.status==="COMPLETED" && 
-                      <PDFDownloadLink document={<Certificate />} fileName="FORM">
+                      <PDFDownloadLink document={<Certificate booking={b}/>} fileName={`${b.user.name}_${b.id}`}>
                         {({ loading }) =>
                         loading ? (
                           <button>Loading Document...</button>

@@ -24,5 +24,11 @@ class UtilityMethods {
     if(gender === "M") return "Male"
     else return "Female"
   }
+   calculateAge(birthday) { 
+    var ageDifMs = Date.now() - new Date(birthday).getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    console.log("Age is ",birthday,Math.abs(ageDate.getUTCFullYear() - 1970))
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
 }
 export default new UtilityMethods();
