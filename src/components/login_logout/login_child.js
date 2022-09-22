@@ -6,7 +6,7 @@ import AuthenticationService from '../../AuthenticationService';
 
 const Login=(props)=>{
 
-    const paperStyle={padding :20,height:'73vh',width:300, margin:"0 auto"}
+    const paperStyle={padding :20,height:'65vh',width:300, margin:"0 auto"}
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'8px 0'}
     const inpStyle ={margin:'5px 0'}

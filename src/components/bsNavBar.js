@@ -121,8 +121,8 @@ function BsNavBar({isLoggedIn,setIsUserLoggedIn}) {
                 </NavLink>
               </li>
               <li>
-                <NavLink class="dropdown-item" to="#">
-                  Settings
+                <NavLink class="dropdown-item" to="/myBookings">
+                  My Bookings
                 </NavLink>
               </li>
               <li>
