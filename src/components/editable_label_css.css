@@ -1,0 +1,14 @@
+#edit_icon{
+    font-weight: bolder;
+    margin: auto 5px;
+    cursor: pointer;
+    font-size: 20px;
+    color:#1189a1;
+}
+
+#edit_icon:hover{
+    color: grey;
+}
+button{
+    margin:auto 3px;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import AuthenticationService from "../AuthenticationService";
-
+import "./navcss.css"
 function BsNavBar({isLoggedIn,setIsUserLoggedIn}) {
   
   const history = useHistory();
@@ -36,7 +36,7 @@ function BsNavBar({isLoggedIn,setIsUserLoggedIn}) {
           </NavLink>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <NavLink class="nav-link nav-link" to="/home">
+              <NavLink class="nav-link nav-link" id="nv4" to="/home">
                 Home
               </NavLink>
             </li>
@@ -114,19 +114,20 @@ function BsNavBar({isLoggedIn,setIsUserLoggedIn}) {
             <ul
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuAvatar"
+              id="dropdown"
             >
               <li>
-                <NavLink class="dropdown-item" to="#">
+                <NavLink class="dropdown-item" id="nv1" to="/myProfile">
                   My profile
                 </NavLink>
               </li>
               <li>
-                <NavLink class="dropdown-item" to="/myBookings">
+                <NavLink class="dropdown-item" id="nv2" to="/myBookings">
                   My Bookings
                 </NavLink>
               </li>
               <li>
-                <button class="dropdown-item" onClick={logOut}>
+                <button class="dropdown-item" id="nv3" onClick={logOut}>
                   Logout
                 </button>
               </li>

@@ -2,7 +2,6 @@
 import './App.css';
 import SignInOutContainer from './components/login_logout/loginLogoutContainer';
 import {Route , BrowserRouter , Switch} from 'react-router-dom'
-import { Login } from '@mui/icons-material';
 
 import React, {  useState } from 'react';
 import Home from './components/home';
@@ -13,6 +12,7 @@ import AuthenticationService from './AuthenticationService';
 import Hospitals from './components/hospitals';
 import ErrorComponent from './components/errorComponent';
 import MyBookings from './components/myBookings';
+import MyProfile from './components/myProfile';
 
 
 function App() {
@@ -41,9 +41,13 @@ function App() {
         <SignInOutContainer setAlert={setAlert} isLoggedIn={isLoggedIn} setIsUserLoggedIn={setIsUserLoggedIn}/>
       </Route>
       
-      <Route exact path="/login">
-        <Login />
-      </Route>
+      
+      <AuthenticatedRoute
+            exact
+            path='/myProfile'
+            component={MyProfile}
+            setAlert={setAlert}
+      />
       <AuthenticatedRoute
             exact
             path='/home'

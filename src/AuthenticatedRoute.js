@@ -6,7 +6,7 @@ export default function AuthenticatedRoute({setAlert , component:ComponentToRend
     if (AuthenticationService.isUserLoggedIn()) {
       return <Route  render={p => <ComponentToRender {...props } {...p} setAlert={setAlert} />} {...props } />;
     } else {
-        props.setAlert("visible","Please Login","danger");
+        setAlert("visible","Please Login","danger");
       return <Redirect to='/' />;
     }
   }
